@@ -9,3 +9,5 @@ __pycache__/
 *.log
 *.csv
 .token
+.env
+allure-results/

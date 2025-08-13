@@ -1,18 +1,26 @@
 from custom_requester.custom_requester import CustomRequester
+from requests import Session
+from constants import BASE_URL
+from typing import List
+from schemas.movie_schema import CreateMovieRequestSchema
+from requests import Response
+import allure
+
 
 class MoviesAPI(CustomRequester):
     """
     Класс для работы с API фильмов.
     """
 
-    def __init__(self, session):
-        super().__init__(session=session, base_url="https://api.dev-cinescope.coconutqa.ru")
+    def __init__(self, session: Session):
+        super().__init__(session=session, base_url=BASE_URL)
 
-    def create_movie(self, movie_data, expected_status=201):
+    @allure.step("Создание фильма /movies")
+    def create_movie(self, movie_data: CreateMovieRequestSchema, expected_status: int = 201) -> Response:
         """
         Создание фильма
         :param movie_data: данные для создания фильма
-        :param expected_status: Ожидаемый статус-код.
+        :param expected_status: Ожидаемый статус-код
         """
         return self.send_request(
             method="POST",
@@ -21,7 +29,8 @@ class MoviesAPI(CustomRequester):
             expected_status=expected_status
         )
 
-    def get_movie(self, movie_id, expected_status=200):
+    @allure.step("Получение фильма /movies/{movie_id}")
+    def get_movie(self, movie_id: str, expected_status=200) -> Response:
         """
         Получение информации о фильме по ID
         :param movie_id: ID фильма
@@ -33,8 +42,10 @@ class MoviesAPI(CustomRequester):
             expected_status=expected_status
         )
 
-    def get_movies(self, expected_status=200, page_size=10, page=1, min_price=1, max_price=1000,
-                   locations=['MSK','SPB'], published=True, genre_id=None, created_at='asc'):
+    @allure.step("Получение списка фильмов /movies")
+    def get_movies(self, expected_status: int = 200, page_size: int = 10, page: int = 1,
+                   min_price: int = 1, max_price: int = 1000, locations: List[str] = ['MSK', 'SPB'],
+                   published: bool = True, genre_id: None = None, created_at: str = 'asc') -> Response:
         """
         Получение списка фильмов с фильтрацией.
         :param expected_status: Ожидаемый статус-код.
@@ -53,24 +64,34 @@ class MoviesAPI(CustomRequester):
             'minPrice': min_price,
             'maxPrice': max_price,
             'locations': locations,
-            'publisghed': published,
+            'published': published,
             'createdAt': created_at
         }
 
         if genre_id is not None:
             params = params.copy()
-            params.update({'genreId': genre_id})
+        params.update({'genreId': genre_id})
 
         return self.send_request(
             method="GET",
             endpoint='/movies',
             params=params,
-            expected_status=expected_status
-        )
+            expected_status=expected_status)
 
-    def delete_movie(self, movie_id, expected_status=200):
+    @allure.step("Получение списка ID фильмов")
+    def get_movies_id(self) -> List[str | int]:
         """
-        Метод удаляет фильм по его ID.
+        Получение ID фильмов
+        """
+        response = self.get_movies()
+        movies = response['movies']
+        ids = list(map(lambda x: x['id'], movies))
+        return ids
+
+    @allure.step("Удаление фильма /movies/{movie_id}")
+    def delete_movie(self, movie_id: str, expected_status: int = 200) -> Response:
+        """
+        Метод удаляет фильм по его ID
         :param movie_id: ID фильма
         """
         return self.send_request(
@@ -79,7 +100,9 @@ class MoviesAPI(CustomRequester):
             expected_status=expected_status
         )
 
-    def update_movie(self, movie_id, movie_data, expected_status=200):
+    @allure.step("Обновление фильма /movies/{movie_id}")
+    def update_movie(self, movie_id: str, movie_data: CreateMovieRequestSchema,
+                     expected_status: int = 200) -> Response:
         """
         Метод обновляет данные фильма
         :param movie_id: Id фильма
