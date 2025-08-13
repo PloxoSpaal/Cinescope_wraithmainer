@@ -1,8 +1,13 @@
-
+from requests import Session, Response
 import json
 import requests
 import logging
 import os
+import pytest
+from pydantic import BaseModel
+from constants import RESET, RED, GREEN
+import allure
+
 
 class CustomRequester:
     """
@@ -20,8 +25,8 @@ class CustomRequester:
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
 
-
-    def send_request(self, method, endpoint, data=None, expected_status=200, need_logging=True, params=None):
+    @allure.step("Отправка {method}-запроса на {endpoint}")
+    def send_request(self, method: str, endpoint: str, data=None, expected_status: int = 200, need_logging: bool = True, params=None):
         """
         Универсальный метод для отправки запросов.
         :param method: HTTP метод (GET, POST, PUT, DELETE и т.д.).
@@ -32,6 +37,8 @@ class CustomRequester:
         :return: Объект ответа requests.Response.
         """
         url = f"{self.base_url}{endpoint}"
+        if isinstance(data, BaseModel):
+            data = json.loads(data.model_dump_json(exclude_unset=True))
         response = self.session.request(method, url, json=data, headers=self.headers, params=params)
         if need_logging:
             self.log_request_and_response(response)
@@ -40,7 +47,7 @@ class CustomRequester:
         return response
 
 
-    def update_session_headers(self, session, **kwargs):
+    def update_session_headers(self, session: Session, **kwargs):
         """
         Обновление заголовков сессии.
         :param session: Объект requests.Session, предоставленный API-классом.
@@ -50,7 +57,7 @@ class CustomRequester:
         session.headers.update(self.headers)  # Обновляем заголовки в текущей сессии
 
 
-    def clear_session_headers(self, session):
+    def clear_session_headers(self, session: Session):
         """
         Очищает заголовки сессии.
         :param session: Объект requests.Session, предоставленный API-классом.
@@ -58,20 +65,9 @@ class CustomRequester:
         session.headers.clear()
 
 
-    def clear_session_cookies(self, session):
-        """
-        Очищает куки сессии.
-        :param session: Объект requests.Session, предоставленный API-классом.
-        """
-        pass
-
-
-    def log_request_and_response(self, response):
+    def log_request_and_response(self, response: Response):
         try:
             request = response.request
-            GREEN = '\033[32m'
-            RED = '\033[31m'
-            RESET = '\033[0m'
             headers = " \\\n".join([f"-H '{header}: {value}'" for header, value in request.headers.items()])
             full_test_name = f"pytest {os.environ.get('PYTEST_CURRENT_TEST', '').replace(' (call)', '')}"
 
@@ -79,6 +75,8 @@ class CustomRequester:
             if hasattr(request, 'body') and request.body is not None:
                 if isinstance(request.body, bytes):
                     body = request.body.decode('utf-8')
+                elif isinstance(request.body, str):
+                    body = request.body
                 body = f"-d '{body}' \n" if body != '{}' else ''
 
             self.logger.info(f"\n{'=' * 40} REQUEST {'=' * 40}")
