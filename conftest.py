@@ -1,106 +1,90 @@
+import os
 import random
+from datetime import datetime
+
 import pytest
 import faker
 import requests
-from constants import BASE_URL, PASSWORD, USERNAME, HEADERS, AUTH_BASE_URL, OK_STATUS_CODE, REGISTER_ENDPOINT, LOGIN_ENDPOINT, USER_CREDS
+import os
+from constants import BASE_URL, HEADERS, AUTH_BASE_URL, OK_STATUS_CODE, REGISTER_ENDPOINT, Roles
+from schemas.auth_shema import LoginRequestSchema
+from schemas.db_schema.user_db_schema import UserTableDBSchema
+from schemas.movie_fixture_shema import MovieFixtureSchema
+from schemas.movie_schema import CreateMovieRequestSchema, CreateMovieResponseSchema
 from utils.data_generator import DataGenerator
+from schemas.user_entity_schema import User
 from custom_requester.custom_requester import CustomRequester
 from api.api_manager import ApiManager
+from typing import List
+from dotenv import load_dotenv
+from schemas.user_fixture_schema import UserSchema, RegisterUserResponseSchema, UserFixtureSchema
+from sqlalchemy.orm import declarative_base, sessionmaker, Session
+from sqlalchemy import create_engine, Column, String, Boolean, DateTime, Integer, text
+
 
 fake = faker.Faker()
+load_dotenv()
+
 
 @pytest.fixture(scope='session')
-def genre_id():
+def genre_id() -> List[int]:
+    """
+    Фикстура получения всех ID жанров
+    :return: Список ID жанров
+    """
     response = requests.get(f'{BASE_URL}/genres')
     result = list(map(lambda x: x['id'], response.json()))
     return result
 
-@pytest.fixture
-def movie_data(genre_id):
-    data = {
-        "name": fake.sentence(),
-        "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
-        "price": fake.random_int(99, 1000),
-        "description": fake.text(),
-        "location": random.choice(['MSK', 'SPB']),
-        "published": fake.boolean(65),
-        "genreId": random.choice(genre_id)
-    }
-    return data
 
 @pytest.fixture
-def incorrect_movie_data(genre_id):
-    data = {
-        "name": fake.sentence(),
-        "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
-        "price": fake.random_int(99, 1000),
-        "description": fake.text(),
-        "location": fake.random_int(),
-        "published": fake.sentence(),
-        "genreId": random.choice(genre_id)
-    }
-    return data
+def movie_data(genre_id) -> CreateMovieRequestSchema:
+    """
+    Фикетура создаёт данные для создания фильма
+    :param genre_id: Список ID жанров
+    :return:
+    """
+    return CreateMovieRequestSchema(
+        name=DataGenerator.generate_random_movie_name(),
+        imageUrl="https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+        price=DataGenerator.generate_random_int(99, 1000),
+        description=DataGenerator.generate_random_text(),
+        location=DataGenerator.generate_random_choice(['MSK', 'SPB']),
+        published=DataGenerator.generate_random_bool(),
+        genreId=DataGenerator.generate_random_choice(genre_id))
 
-@pytest.fixture(scope='session')
-def admin_auth_session():
-    data = {
-        "email": USERNAME,
-        "password": PASSWORD
-    }
-    session = requests.Session()
-    session.headers.update(HEADERS)
-    response = requests.post(
-        f'{AUTH_BASE_URL}/login',
-        headers=HEADERS,
-        json=data
-    )
-    assert response.status_code in OK_STATUS_CODE, 'Auth Error'
-    access_token = response.json().get('accessToken')
-    assert access_token is not None, 'Access Token is not defined'
-    refresh_token = response.json().get('accessToken')
-    assert refresh_token is not None, 'Refresh Token is not defined'
-    session.headers.update({
-        "Authorization": f"Bearer {access_token}",
-        "X-Refresh-Token": refresh_token
-    })
-    return session
+
+@pytest.fixture
+def incorrect_movie_data(genre_id) -> CreateMovieRequestSchema:
+    """
+    Фикетура создаёт некорректные данные для создания фильма
+    :param genre_id: Список ID жанров
+    :return:
+    """
+    return CreateMovieRequestSchema(
+        name=DataGenerator.generate_random_movie_name(),
+        imageUrl="https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+        price=DataGenerator.generate_random_int(99, 1000),
+        description=DataGenerator.generate_random_text(),
+        location=DataGenerator.generate_random_choice(['MSK', 'SPB']),
+        published=DataGenerator.generate_random_bool(),
+        genreId=111111111)
+
 
 @pytest.fixture(scope="function")
-def test_user():
+def test_user() -> UserSchema:
     """
-    Генерация случайного пользователя для тестов.
+    Фикстура создаёт случайного пользователя для тестов
     """
-    random_email = DataGenerator.generate_random_email()
-    random_name = DataGenerator.generate_random_name()
     random_password = DataGenerator.generate_random_password()
 
-    return {
-        "email": random_email,
-        "fullName": random_name,
-        "password": random_password,
-        "passwordRepeat": random_password,
-        "roles": ["USER"]
-    }
+    return UserSchema(
+        email=DataGenerator.generate_random_email(),
+        fullName=DataGenerator.generate_random_name(),
+        password=random_password,
+        passwordRepeat=random_password,
+        roles=[Roles.USER])
 
-@pytest.fixture(scope="session")
-def auth_session(test_user):
-    # Регистрируем нового пользователя
-    register_url = f"{AUTH_BASE_URL}/register"
-    response = requests.post(register_url, json=test_user, headers=HEADERS)
-    assert response.status_code == 201, "Ошибка регистрации пользователя"
-    login_url = f"{AUTH_BASE_URL}/login"
-    login_data = {
-        "email": test_user["email"],
-        "password": test_user["password"]
-    }
-    response = requests.post(login_url, json=login_data, headers=HEADERS)
-    assert response.status_code == 200, "Ошибка авторизации"
-    token = response.json().get("accessToken")
-    assert token is not None, "Токен доступа отсутствует в ответе"
-    session = requests.Session()
-    session.headers.update(HEADERS)
-    session.headers.update({"Authorization": f"Bearer {token}"})
-    return session
 
 @pytest.fixture(scope="session")
 def auth_requester():
@@ -110,6 +94,7 @@ def auth_requester():
     session = requests.Session()
     return CustomRequester(session=session, base_url=AUTH_BASE_URL)
 
+
 @pytest.fixture(scope="session")
 def cinescope_requester():
     """
@@ -118,29 +103,22 @@ def cinescope_requester():
     session = requests.Session()
     return CustomRequester(session=session, base_url=BASE_URL)
 
-@pytest.fixture(scope="session")
-def admin_cinescope_requester(admin_auth_session):
-    """
-    Фикстура для создания экземпляра CustomRequester.
-    """
-    session = requests.Session()
-    return CustomRequester(session=admin_auth_session, base_url=BASE_URL)
 
 @pytest.fixture(scope="function")
-def registered_user(auth_requester, test_user):
+def registered_user(auth_requester, test_user: UserSchema) -> UserFixtureSchema:
     """
     Фикстура для регистрации и получения данных зарегистрированного пользователя.
     """
     response = auth_requester.send_request(
         method="POST",
         endpoint=REGISTER_ENDPOINT,
-        data=test_user,
+        data=test_user.model_dump(),
         expected_status=201
     )
-    response_data = response.json()
-    registered_user = test_user.copy()
-    registered_user["id"] = response_data["id"]
-    return registered_user
+    return UserFixtureSchema(
+        request=test_user,
+        response=RegisterUserResponseSchema.model_validate_json(response.text))
+
 
 @pytest.fixture(scope="session")
 def session():
@@ -151,6 +129,7 @@ def session():
     yield http_session
     http_session.close()
 
+
 @pytest.fixture(scope="session")
 def api_manager(session):
     """
@@ -158,17 +137,165 @@ def api_manager(session):
     """
     return ApiManager(session)
 
+
 @pytest.fixture
-def create_movie_fixture(movie_data, api_manager):
+def create_and_delete_movie_fixture(
+        movie_data: CreateMovieRequestSchema, super_admin) -> MovieFixtureSchema:
     """
     Фикстура для создания фильма.
     """
-    api_manager.auth_api.authenticate(USER_CREDS)
-    response = api_manager.movie_api.create_movie(
+    response = super_admin.api.movie_api.create_movie(
         movie_data=movie_data,
         expected_status=201
     )
-    response_data = response.json()
-    return response_data
+    response_data = CreateMovieResponseSchema.model_validate_json(response.text)
+    movie_fixture = MovieFixtureSchema(request=movie_data, response=response_data)
+    yield movie_fixture
+    super_admin.api.movie_api.delete_movie(movie_fixture.id)
 
 
+@pytest.fixture
+def create_movie_fixture(movie_data: CreateMovieRequestSchema, super_admin) -> MovieFixtureSchema:
+    """
+    Фикстура для создания фильма.
+    """
+    response = super_admin.api.movie_api.create_movie(
+        movie_data=movie_data,
+        expected_status=201
+    )
+    response_data = CreateMovieResponseSchema.model_validate_json(response.text)
+    movie_fixture = MovieFixtureSchema(request=movie_data, response=response_data)
+    return movie_fixture
+
+
+@pytest.fixture
+def user_session():
+    """
+    Фикстура для создания сессии пользователя
+    :return:
+    """
+    user_pool = []
+
+    def _create_user_session():
+        session = requests.Session()
+        user_session = ApiManager(session)
+        user_pool.append(user_session)
+        return user_session
+
+    yield _create_user_session
+
+    for user in user_pool:
+        user.close_session()
+
+
+@pytest.fixture
+def super_admin(user_session):
+    """
+    Фикстура для создания сессии с ролью SUPER_ADMIN
+    :param user_session:
+    :return:
+    """
+    new_session = user_session()
+
+    super_admin = User(
+        email=os.getenv('SUPER_ADMIN_USERNAME'),
+        password=os.getenv('SUPER_ADMIN_PASSWORD'),
+        roles=[Roles.SUPER_ADMIN],
+        api=new_session)
+    creds = LoginRequestSchema(email=super_admin.email, password=super_admin.password)
+
+    super_admin.api.auth_api.authenticate(creds)
+    return super_admin
+
+
+@pytest.fixture(scope="function")
+def creation_user_data(test_user: UserSchema) -> UserSchema:
+    """
+    Фикстура для создания пользовательских данных
+    :param test_user:
+    :return:
+    """
+    return UserSchema(
+        email=test_user.email,
+        fullName=test_user.fullName,
+        password=test_user.password,
+        passwordRepeat=test_user.passwordRepeat,
+        roles=test_user.roles,
+        verified=True,
+        banned=False)
+
+
+@pytest.fixture
+def common_user(user_session, super_admin, creation_user_data: UserSchema):
+    """
+    Фикстура для создания сессии с ролью USER
+    :param user_session:
+    :param super_admin:
+    :param creation_user_data:
+    """
+    new_session = user_session()
+
+    common_user = User(
+        email=creation_user_data.email,
+        password=creation_user_data.password,
+        roles=[Roles.USER],
+        api=new_session)
+
+    super_admin.api.user_api.create_user(creation_user_data)
+    creds = LoginRequestSchema(email=common_user.email, password=common_user.password)
+    common_user.api.auth_api.authenticate(creds)
+    return common_user
+
+
+@pytest.fixture
+def admin(user_session):
+    """
+    Фикстура для создания сессии с ролью ADMIN
+    :param user_session:
+    :return:
+    """
+    new_session = user_session()
+
+    admin = User(
+        email=os.getenv('SUPER_ADMIN_USERNAME'),
+        password=os.getenv('SUPER_ADMIN_PASSWORD'),
+        roles=[Roles.ADMIN],
+        api=new_session)
+
+    creds = LoginRequestSchema(email=admin.email, password=admin.password)
+    admin.api.auth_api.authenticate(creds)
+    return admin
+
+
+@pytest.fixture
+def db_engine() -> create_engine:
+    connection_string = \
+        f"postgresql+psycopg2://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+    engine = create_engine(connection_string)
+    return engine
+
+@pytest.fixture
+def db_session(db_engine) -> Session:
+    session = Session(db_engine)
+    yield session
+    session.close()
+
+@pytest.fixture
+def db_create_user(db_session, test_user):
+    user = UserTableDBSchema(
+        id='test_id',
+        email=test_user.email,
+        full_name=test_user.fullName,
+        password=test_user.password,
+        created_at=datetime.now(),
+        updated_at=datetime.now(),
+        verified=False,
+        banned=False,
+        roles='{USER}'
+    )
+    db_session.add(user)
+    db_session.commit()
+    yield db_session
+    db_session.delete(user)
+    db_session.commit()
+    db_session.close()
