@@ -1,7 +1,7 @@
 import os
 import random
 from datetime import datetime
-
+from playwright.sync_api import sync_playwright, Page
 import pytest
 import faker
 import requests
@@ -11,6 +11,9 @@ from schemas.auth_shema import LoginRequestSchema
 from schemas.db_schema.user_db_schema import UserTableDBSchema
 from schemas.movie_fixture_shema import MovieFixtureSchema
 from schemas.movie_schema import CreateMovieRequestSchema, CreateMovieResponseSchema
+from ui.login_page import LoginPage
+from ui.main_page import MainPage
+from ui.register_page import RegisterPage
 from utils.data_generator import DataGenerator
 from schemas.user_entity_schema import User
 from custom_requester.custom_requester import CustomRequester
@@ -24,7 +27,42 @@ from sqlalchemy import create_engine, Column, String, Boolean, DateTime, Integer
 
 fake = faker.Faker()
 load_dotenv()
+DEFAULT_UI_TIMEOUT = 10000
 
+
+@pytest.fixture(scope="session")  # Браузер запускается один раз для всей сессии
+def browser(playwright):
+    browser = playwright.chromium.launch(headless=False, args=['--start-maximized'])
+    yield browser  # yield возвращает значение фикстуры, выполнение теста продолжится после yield
+    browser.close()  # Браузер закрывается после завершения всех тестов
+
+
+@pytest.fixture(scope="function")  # Контекст создается для каждого теста
+def context(browser):
+    context = browser.new_context(no_viewport=True)
+    context.tracing.start(screenshots=True, snapshots=True, sources=True)  # Трассировка для отладки
+    context.set_default_timeout(DEFAULT_UI_TIMEOUT)  # Установка таймаута по умолчанию
+    yield context  # yield возвращает значение фикстуры, выполнение теста продолжится после yield
+    context.close()  # Контекст закрывается после завершения теста
+
+
+@pytest.fixture(scope="function")  # Страница создается для каждого теста
+def page(context) -> Page:
+    page = context.new_page()
+    yield page  # yield возвращает значение фикстуры, выполнение теста продолжится после yield
+    page.close()  # Страница закрывается после завершения теста
+
+@pytest.fixture(scope='function')
+def register_page(page) -> RegisterPage:
+    return RegisterPage(page)
+
+@pytest.fixture(scope='function')
+def login_page(page) -> LoginPage:
+    return LoginPage(page)
+
+@pytest.fixture(scope='function')
+def main_page(page) -> MainPage:
+    return MainPage(page)
 
 @pytest.fixture(scope='session')
 def genre_id() -> List[int]:
