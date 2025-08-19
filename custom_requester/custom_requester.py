@@ -47,6 +47,7 @@ class CustomRequester:
         return response
 
 
+    @allure.step('Обновление заголовков сессии')
     def update_session_headers(self, session: Session, **kwargs):
         """
         Обновление заголовков сессии.
@@ -57,6 +58,7 @@ class CustomRequester:
         session.headers.update(self.headers)  # Обновляем заголовки в текущей сессии
 
 
+    @allure.step('Очистка заголовков сессии')
     def clear_session_headers(self, session: Session):
         """
         Очищает заголовки сессии.

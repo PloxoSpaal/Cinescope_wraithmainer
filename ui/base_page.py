@@ -3,7 +3,10 @@ from ui.action_page import PageAction
 import allure
 
 
-class BasePage(PageAction): #Базовая логика доспустимая для всех страниц на сайте
+class BasePage(PageAction):
+    """
+    Класс BasePage для описания базовой страницы
+    """
     def __init__(self, page: Page):
         super().__init__(page)
         self.home_url = "https://dev-cinescope.coconutqa.ru/"

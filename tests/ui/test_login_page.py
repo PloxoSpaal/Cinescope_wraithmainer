@@ -1,5 +1,7 @@
 import time
 from playwright.sync_api import sync_playwright
+from pytest_check import check
+
 from ui.login_page import LoginPage
 from utils.data_generator import DataGenerator as DG
 import pytest
@@ -14,7 +16,8 @@ class TestloginPage:
     def test_login_user_login_page(self, login_page: LoginPage, registered_user):
         login_page.open_login_page()
         login_page.login_user(email=registered_user.email, password=registered_user.password)
-        login_page.assert_was_redirect_to_home_page()
+        with check:
+            login_page.assert_was_redirect_to_home_page()
         login_page.make_screenshot_and_attach_to_allure()
         login_page.assert_allert_was_pop_up()
 
@@ -22,5 +25,6 @@ class TestloginPage:
     def test_login_with_error_user_login_page(self, login_page: LoginPage, registered_user):
         login_page.open_login_page()
         login_page.login_user(email=registered_user.email, password=registered_user.password+'123')
-        login_page.assert_allert_error_pop_up()
+        with check:
+            login_page.assert_allert_error_pop_up()
         login_page.make_screenshot_and_attach_to_allure()
