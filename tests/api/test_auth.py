@@ -20,10 +20,10 @@ class TestAuth:
         """
         with check:
             response = admin.api.auth_api.register_user(test_user, expected_status=201)
-        with allure.step('Валидация тела ответа по схеме RegisterUserResponseSchema')
+        with allure.step('Валидация тела ответа по схеме RegisterUserResponseSchema'):
             with check:
                 response_data = RegisterUserResponseSchema.model_validate_json(response.text)
-        with allure.step('Проверка статус-кода')
+        with allure.step('Проверка статус-кода'):
             with check:
                 assert response_data.email == test_user.email, "Email не совпадает"
         admin.api.user_api.delete_user(response_data.id, expected_status=200)
@@ -36,10 +36,10 @@ class TestAuth:
         with check:
             login_data = LoginRequestSchema(email=registered_user.email, password=registered_user.password)
             response = super_admin.api.auth_api.login_user(login_data, expected_status=200)
-        with allure.step('Валидация тела ответа по схеме LoginResponseSchema')
+        with allure.step('Валидация тела ответа по схеме LoginResponseSchema'):
             with check:
                 response_data = LoginResponseSchema.model_validate_json(response.text)
-        with allure.step('Проверка статус-кода')
+        with allure.step('Проверка статус-кода'):
             with check:
                 assert response_data.email == registered_user.email, "Email не совпадает"
         super_admin.api.user_api.delete_user(response_data.id, expected_status=200)
@@ -55,7 +55,7 @@ class TestAuth:
             login_data = LoginRequestSchema(email=registered_user.email, password=DataGenerator.generate_random_password())
             response = admin.api.auth_api.login_user(login_data, expected_status=401)
         response_data = response.json()
-        with allure.step('Проверка сообщения в теле ответа')
+        with allure.step('Проверка сообщения в теле ответа'):
             with check:
                 assert response_data['message'] == AUTH_ERR_MSG, \
                     f'Expected error message: "{AUTH_ERR_MSG}", got "{response_data['message']}"'

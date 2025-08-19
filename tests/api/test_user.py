@@ -1,7 +1,6 @@
 import pytest
 import allure
 from pytest_check import check
-
 from constants import FORBIDDEN_MOVIE_ERR_MSG
 from schemas.error_schema import BaseError
 from schemas.user_entity_schema import User

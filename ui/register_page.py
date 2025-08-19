@@ -1,5 +1,6 @@
 from playwright.sync_api import Page
 from ui.base_page import BasePage
+import allure
 
 
 class RegisterPage(BasePage):

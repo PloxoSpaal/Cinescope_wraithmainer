@@ -1,5 +1,7 @@
 import time
 from playwright.sync_api import sync_playwright
+from pytest_check import check
+
 from ui.register_page import RegisterPage
 from utils.data_generator import DataGenerator as DG
 import pytest
