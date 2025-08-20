@@ -89,6 +89,7 @@ jobs:
 
   publish-report:  # Джоба для публикации Allure-отчета на GitHub Pages
     if: always()  # Джоба будет выполнена вне зависимости от успеха или неуспеха run-tests
+    needs: [ test ]
     runs-on: ubuntu-latest  # Используем последнюю версию Ubuntu
 
     steps:
