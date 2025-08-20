@@ -1,0 +1,20 @@
+2025-08-20 09:13:33 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:33 INFO [32mpytest tests/api/movies/test_create_movies.py::test_create_movie_unathorized[0m
+curl -X POST 'https://api.dev-cinescope.coconutqa.ru/movies' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 463' \
+-d '{"name": "High quite style do responsibility gas difficult.", "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png", "price": 498, "description": "Serious yeah on newspaper maybe report base. Property professor game final. Director camera guy early wrong father fire.\nAnswer understand stay rule walk see. Camera indicate which low trouble.", "location": "MSK", "published": false, "genreId": 226}' 
+
+2025-08-20 09:13:33 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:33 INFO 	STATUS_CODE: [31m401[0m
+	DATA: [31m{
+    "message": "Unauthorized",
+    "statusCode": 401
+}[0m
+2025-08-20 09:13:33 INFO ================================================================================

@@ -1,0 +1,120 @@
+2025-08-20 09:13:42 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:42 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movies[create_movie_fixture3] (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' 
+
+2025-08-20 09:13:42 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:42 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "4cc5bb1c-6bf7-4928-8f2f-8cf8ff41e200",
+        "email": "api1@gmail.com",
+        "fullName": "ФИО пользователя",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjIyLCJleHAiOjE3NTU2ODMwMjJ9.7rEQxGB9zI-we1Xa5G7VfMyrTM5vjEpMTb3c8shZVaE",
+    "refreshToken": "7035d14e-41b6-4870-ace1-83c26dde9dab",
+    "expiresIn": 1755683022435
+}
+2025-08-20 09:13:42 INFO ================================================================================
+2025-08-20 09:13:42 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:42 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movies[create_movie_fixture3][0m
+curl -X POST 'https://api.dev-cinescope.coconutqa.ru/movies' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjIyLCJleHAiOjE3NTU2ODMwMjJ9.7rEQxGB9zI-we1Xa5G7VfMyrTM5vjEpMTb3c8shZVaE' \
+-H 'Content-Length: 341' \
+-d '{"name": "Southern a fine.", "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png", "price": 645, "description": "View smile agency. Travel front think mention market response our see. Policy sound your work true parent.", "location": "SPB", "published": false, "genreId": 47}' 
+
+2025-08-20 09:13:42 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:42 INFO 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": 9565,
+    "name": "Southern a fine.",
+    "price": 645,
+    "description": "View smile agency. Travel front think mention market response our see. Policy sound your work true parent.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "SPB",
+    "published": false,
+    "rating": 0,
+    "genreId": 47,
+    "createdAt": "2025-08-20T09:13:42.889Z",
+    "genre": {
+        "name": "фэнтези вперед"
+    }
+}
+2025-08-20 09:13:42 INFO ================================================================================
+
+2025-08-20 09:13:43 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:43 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movies[create_movie_fixture3][0m
+curl -X DELETE 'https://api.dev-cinescope.coconutqa.ru/movies/9565' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjIyLCJleHAiOjE3NTU2ODMwMjJ9.7rEQxGB9zI-we1Xa5G7VfMyrTM5vjEpMTb3c8shZVaE' \
+-H 'Content-Length: 0' \
+
+2025-08-20 09:13:43 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:43 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "id": 9565,
+    "name": "Southern a fine.",
+    "price": 645,
+    "description": "View smile agency. Travel front think mention market response our see. Policy sound your work true parent.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "SPB",
+    "published": false,
+    "rating": 0,
+    "genreId": 47,
+    "createdAt": "2025-08-20T09:13:42.889Z",
+    "reviews": [],
+    "genre": {
+        "name": "фэнтези вперед"
+    }
+}
+2025-08-20 09:13:43 INFO ================================================================================
+
+2025-08-20 09:13:43 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:43 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movies[create_movie_fixture3][0m
+curl -X GET 'https://api.dev-cinescope.coconutqa.ru/movies/9565' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjIyLCJleHAiOjE3NTU2ODMwMjJ9.7rEQxGB9zI-we1Xa5G7VfMyrTM5vjEpMTb3c8shZVaE' \
+
+2025-08-20 09:13:43 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:43 INFO 	STATUS_CODE: [31m404[0m
+	DATA: [31m{
+    "message": "Фильм не найден",
+    "error": "Not Found",
+    "statusCode": 404
+}[0m
+2025-08-20 09:13:43 INFO ================================================================================

@@ -1,0 +1,62 @@
+2025-08-20 09:13:53 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:53 INFO [32mpytest tests/api/test_auth.py::test_register_user (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' 
+
+2025-08-20 09:13:53 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:53 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "4cc5bb1c-6bf7-4928-8f2f-8cf8ff41e200",
+        "email": "api1@gmail.com",
+        "fullName": "ФИО пользователя",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjMzLCJleHAiOjE3NTU2ODMwMzN9.Sp7onyk2eGc1qD4kr57I6EyzGQZKIeRVKO4yqG4TvEQ",
+    "refreshToken": "6fdc4ccb-5e3f-4109-8177-61e3ca0b1869",
+    "expiresIn": 1755683033328
+}
+2025-08-20 09:13:53 INFO ================================================================================
+2025-08-20 09:13:53 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:53 INFO [32mpytest tests/api/test_auth.py::test_register_user[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/register' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjMzLCJleHAiOjE3NTU2ODMwMzN9.Sp7onyk2eGc1qD4kr57I6EyzGQZKIeRVKO4yqG4TvEQ' \
+-H 'Cookie: refresh_token=6fdc4ccb-5e3f-4109-8177-61e3ca0b1869' \
+-H 'Content-Length: 131' \
+-d '{"email": "8c92sdmg@gmail.com", "fullName": "James Ayers", "password": "x2kfnS*u", "passwordRepeat": "x2kfnS*u", "roles": ["USER"]}' 
+
+2025-08-20 09:13:53 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:53 INFO 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": "1dfffccb-7ee3-465e-a0e2-819cd138867e",
+    "email": "8c92sdmg@gmail.com",
+    "fullName": "James Ayers",
+    "verified": true,
+    "banned": false,
+    "roles": [
+        "USER"
+    ],
+    "createdAt": "2025-08-20T09:13:53.633Z"
+}
+2025-08-20 09:13:53 INFO ================================================================================

@@ -1,0 +1,98 @@
+2025-08-20 09:13:45 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:45 INFO [32mpytest tests/api/movies/test_get_movies.py::test_get_movies_with_filter[0m
+curl -X GET 'https://api.dev-cinescope.coconutqa.ru/movies?pageSize=5&page=1&minPrice=700&maxPrice=1000&locations=MSK&locations=SPB&published=True&createdAt=asc' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+
+2025-08-20 09:13:45 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:45 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "movies": [
+        {
+            "id": 22,
+            "name": "Море крови и рваных жоп",
+            "description": "Девушка открывает в себе телекинетические способности и с их помощью сдает ЕГЭ",
+            "genreId": 3,
+            "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_CF05Bl3sqs8q0s5LOd1ephWDHx-6C8Y0Pg&s",
+            "price": 998,
+            "rating": 2,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2024-07-12T09:37:03.390Z",
+            "genre": {
+                "name": "Фантастика"
+            }
+        },
+        {
+            "id": 5,
+            "name": "Море крови и рваных жоп 2",
+            "description": "Внучка главной героини из первого фильма получила силу, которая и не снилась ее бабуле. Вместо того, чтобы направить телекинетические способности на получение образования она взрывает пуканы бумеров, вейпит, кринжует и считает, что это СВЭГ.",
+            "genreId": 2,
+            "imageUrl": "https://cdn1.ozone.ru/multimedia/c600/1034228334.jpg",
+            "price": 1000,
+            "rating": 4,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2024-07-12T09:43:15.986Z",
+            "genre": {
+                "name": "Комедия"
+            }
+        },
+        {
+            "id": 37,
+            "name": "Heroes",
+            "description": "Описание фильма",
+            "genreId": 3,
+            "imageUrl": "https://ya.ru/images/search?img_url=https%3A%2F%2Fxn----otbbs7ad3a.xn--p1ai%2Fwp-content%2Fuploads%2F2023%2F04%2Fmvjmvnxrfjqksxn8byj4eg.jpeg&lr=8&pos=0&rpt=simage&source=serp&text=герои%207",
+            "price": 1000,
+            "rating": 4,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2024-08-27T16:31:28.293Z",
+            "genre": {
+                "name": "Фантастика"
+            }
+        },
+        {
+            "id": 38,
+            "name": "Heroes 5",
+            "description": "Описание фильма",
+            "genreId": 3,
+            "imageUrl": "https://ya.ru/images/search?img_url=https%3A%2F%2Fxn----otbbs7ad3a.xn--p1ai%2Fwp-content%2Fuploads%2F2023%2F04%2Fmvjmvnxrfjqksxn8byj4eg.jpeg&lr=8&pos=0&rpt=simage&source=serp&text=герои%207",
+            "price": 1000,
+            "rating": 4,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2024-08-27T16:43:24.362Z",
+            "genre": {
+                "name": "Фантастика"
+            }
+        },
+        {
+            "id": 76,
+            "name": "Test Movie",
+            "description": "Описание тестового фильма",
+            "genreId": 7,
+            "imageUrl": "https://example.com/movie.jpg",
+            "price": 1000,
+            "rating": 0,
+            "location": "MSK",
+            "published": true,
+            "createdAt": "2025-02-14T19:54:08.521Z",
+            "genre": {
+                "name": "Мюзикл"
+            }
+        }
+    ],
+    "count": 584,
+    "page": 1,
+    "pageSize": 5,
+    "pageCount": 117
+}
+2025-08-20 09:13:45 INFO ================================================================================

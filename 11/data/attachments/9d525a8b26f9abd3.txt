@@ -1,0 +1,22 @@
+2025-08-20 09:13:47 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:47 INFO [32mpytest tests/api/movies/test_get_movies.py::test_get_movies_with_multiply_filters[514-91-MSK-23][0m
+curl -X GET 'https://api.dev-cinescope.coconutqa.ru/movies?pageSize=10&page=1&minPrice=91&maxPrice=514&locations=MSK&published=True&createdAt=asc&genreId=23' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+
+2025-08-20 09:13:47 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:47 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "movies": [],
+    "count": 0,
+    "page": 1,
+    "pageSize": 10,
+    "pageCount": 0
+}
+2025-08-20 09:13:47 INFO ================================================================================

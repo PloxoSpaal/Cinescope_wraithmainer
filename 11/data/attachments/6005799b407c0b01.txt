@@ -1,0 +1,19 @@
+2025-08-20 09:13:47 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:47 INFO [32mpytest tests/api/movies/test_get_movies.py::test_get_movie_not_found[0m
+curl -X GET 'https://api.dev-cinescope.coconutqa.ru/movies/0' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+
+2025-08-20 09:13:47 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:47 INFO 	STATUS_CODE: [31m404[0m
+	DATA: [31m{
+    "message": "Фильм не найден",
+    "error": "Not Found",
+    "statusCode": 404
+}[0m
+2025-08-20 09:13:47 INFO ================================================================================

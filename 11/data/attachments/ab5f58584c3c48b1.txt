@@ -1,0 +1,54 @@
+2025-08-20 09:13:51 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:51 INFO [32mpytest tests/api/movies/test_update_movies.py::test_update_movie_not_found (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' 
+
+2025-08-20 09:13:51 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:51 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "4cc5bb1c-6bf7-4928-8f2f-8cf8ff41e200",
+        "email": "api1@gmail.com",
+        "fullName": "ФИО пользователя",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjMxLCJleHAiOjE3NTU2ODMwMzF9.sEnuLAceYEgLCWH3RW7wki7zZuflwX87942chlI3_FA",
+    "refreshToken": "27b68fc5-3c43-420d-a292-e20d160a821f",
+    "expiresIn": 1755683031734
+}
+2025-08-20 09:13:51 INFO ================================================================================
+2025-08-20 09:13:52 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:52 INFO [32mpytest tests/api/movies/test_update_movies.py::test_update_movie_not_found[0m
+curl -X PATCH 'https://api.dev-cinescope.coconutqa.ru/movies/0' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjMxLCJleHAiOjE3NTU2ODMwMzF9.sEnuLAceYEgLCWH3RW7wki7zZuflwX87942chlI3_FA' \
+-H 'Content-Length: 431' \
+-d '{"name": "Couple possible say support.", "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png", "price": 565, "description": "Place standard discover young manager. Draw thought machine actually special management responsibility pretty. Peace nice detail behind discover strategy. Certainly perhaps line tough.", "location": "MSK", "published": true, "genreId": 140}' 
+
+2025-08-20 09:13:52 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:52 INFO 	STATUS_CODE: [31m404[0m
+	DATA: [31m{
+    "message": "Фильм не найден",
+    "error": "Not Found",
+    "statusCode": 404
+}[0m
+2025-08-20 09:13:52 INFO ================================================================================

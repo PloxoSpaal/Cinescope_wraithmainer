@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"03df66830909f413b6e5a7faed621a0d","name":"tests.api","statistic":{"failed":0,"broken":5,"skipped":0,"passed":1,"unknown":0,"total":6}},{"uid":"cb7a6742ec2493fda82744aaec54588f","name":"tests.api.movies","statistic":{"failed":0,"broken":0,"skipped":0,"passed":17,"unknown":0,"total":17}}]}

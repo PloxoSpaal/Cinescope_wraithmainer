@@ -1,0 +1,61 @@
+2025-08-20 09:13:55 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:55 INFO [32mpytest tests/api/test_auth.py::test_login_user_with_incorrect_password (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' 
+
+2025-08-20 09:13:55 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:55 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "4cc5bb1c-6bf7-4928-8f2f-8cf8ff41e200",
+        "email": "api1@gmail.com",
+        "fullName": "ФИО пользователя",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjM1LCJleHAiOjE3NTU2ODMwMzV9.g7ipkFUNTndIp8XgE4oKReq37pN7ioQ5aTaN_vbrGJE",
+    "refreshToken": "79f0e7a6-20e9-4c20-aeb0-fd3eb19ed564",
+    "expiresIn": 1755683035709
+}
+2025-08-20 09:13:55 INFO ================================================================================
+
+2025-08-20 09:13:56 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:56 INFO [32mpytest tests/api/test_auth.py::test_login_user_with_incorrect_password (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/register' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 187' \
+-d '{"email": "ghkq7df4@gmail.com", "fullName": "Kelly Bruce", "password": "j#5&69vrUwc$LH?6QSA", "passwordRepeat": "j#5&69vrUwc$LH?6QSA", "roles": ["USER"], "banned": null, "verified": null}' 
+
+2025-08-20 09:13:56 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:56 INFO 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": "27ae4d59-8549-47cc-a039-9426615f03fc",
+    "email": "ghkq7df4@gmail.com",
+    "fullName": "Kelly Bruce",
+    "verified": true,
+    "banned": false,
+    "roles": [
+        "USER"
+    ],
+    "createdAt": "2025-08-20T09:13:56.033Z"
+}
+2025-08-20 09:13:56 INFO ================================================================================

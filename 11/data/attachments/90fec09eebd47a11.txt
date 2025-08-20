@@ -1,0 +1,53 @@
+2025-08-20 09:13:44 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:44 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movie_not_found (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' 
+
+2025-08-20 09:13:44 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:44 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "4cc5bb1c-6bf7-4928-8f2f-8cf8ff41e200",
+        "email": "api1@gmail.com",
+        "fullName": "ФИО пользователя",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjI0LCJleHAiOjE3NTU2ODMwMjR9.HWxo7zeabfaG8SiuFDDETdFJrlfq8HvcB8Qj6OMxwUg",
+    "refreshToken": "06e456aa-3bde-4cd4-a040-b207fc8c4368",
+    "expiresIn": 1755683024932
+}
+2025-08-20 09:13:44 INFO ================================================================================
+2025-08-20 09:13:45 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:45 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movie_not_found[0m
+curl -X DELETE 'https://api.dev-cinescope.coconutqa.ru/movies/0' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjI0LCJleHAiOjE3NTU2ODMwMjR9.HWxo7zeabfaG8SiuFDDETdFJrlfq8HvcB8Qj6OMxwUg' \
+-H 'Content-Length: 0' \
+
+2025-08-20 09:13:45 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:45 INFO 	STATUS_CODE: [31m404[0m
+	DATA: [31m{
+    "message": "Фильм не найден",
+    "error": "Not Found",
+    "statusCode": 404
+}[0m
+2025-08-20 09:13:45 INFO ================================================================================

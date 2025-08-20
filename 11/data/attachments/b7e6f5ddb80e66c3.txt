@@ -1,0 +1,120 @@
+2025-08-20 09:13:43 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:43 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movies[create_movie_fixture4] (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' 
+
+2025-08-20 09:13:43 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:43 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "4cc5bb1c-6bf7-4928-8f2f-8cf8ff41e200",
+        "email": "api1@gmail.com",
+        "fullName": "ФИО пользователя",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjIzLCJleHAiOjE3NTU2ODMwMjN9.1sXgb-cfVyYu_-nUQhcbBg6dZtxUefT3YtwExV9BwzY",
+    "refreshToken": "6c39c485-d212-4d87-aae1-3e98528d0624",
+    "expiresIn": 1755683023642
+}
+2025-08-20 09:13:43 INFO ================================================================================
+2025-08-20 09:13:44 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:44 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movies[create_movie_fixture4][0m
+curl -X POST 'https://api.dev-cinescope.coconutqa.ru/movies' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjIzLCJleHAiOjE3NTU2ODMwMjN9.1sXgb-cfVyYu_-nUQhcbBg6dZtxUefT3YtwExV9BwzY' \
+-H 'Content-Length: 432' \
+-d '{"name": "Vote seek six response cell.", "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png", "price": 340, "description": "Room appear top professor us work. Evidence which hit themselves.\nA bring city ability drop resource. Chair stock write middle. Goal ability miss to sign much lay. Board wife tax door.", "location": "SPB", "published": true, "genreId": 158}' 
+
+2025-08-20 09:13:44 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:44 INFO 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": 9566,
+    "name": "Vote seek six response cell.",
+    "price": 340,
+    "description": "Room appear top professor us work. Evidence which hit themselves.\nA bring city ability drop resource. Chair stock write middle. Goal ability miss to sign much lay. Board wife tax door.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "SPB",
+    "published": true,
+    "rating": 0,
+    "genreId": 158,
+    "createdAt": "2025-08-20T09:13:44.037Z",
+    "genre": {
+        "name": "ужасы механический"
+    }
+}
+2025-08-20 09:13:44 INFO ================================================================================
+
+2025-08-20 09:13:44 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:44 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movies[create_movie_fixture4][0m
+curl -X DELETE 'https://api.dev-cinescope.coconutqa.ru/movies/9566' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjIzLCJleHAiOjE3NTU2ODMwMjN9.1sXgb-cfVyYu_-nUQhcbBg6dZtxUefT3YtwExV9BwzY' \
+-H 'Content-Length: 0' \
+
+2025-08-20 09:13:44 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:44 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "id": 9566,
+    "name": "Vote seek six response cell.",
+    "price": 340,
+    "description": "Room appear top professor us work. Evidence which hit themselves.\nA bring city ability drop resource. Chair stock write middle. Goal ability miss to sign much lay. Board wife tax door.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "SPB",
+    "published": true,
+    "rating": 0,
+    "genreId": 158,
+    "createdAt": "2025-08-20T09:13:44.037Z",
+    "reviews": [],
+    "genre": {
+        "name": "ужасы механический"
+    }
+}
+2025-08-20 09:13:44 INFO ================================================================================
+
+2025-08-20 09:13:44 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:44 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movies[create_movie_fixture4][0m
+curl -X GET 'https://api.dev-cinescope.coconutqa.ru/movies/9566' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjIzLCJleHAiOjE3NTU2ODMwMjN9.1sXgb-cfVyYu_-nUQhcbBg6dZtxUefT3YtwExV9BwzY' \
+
+2025-08-20 09:13:44 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:44 INFO 	STATUS_CODE: [31m404[0m
+	DATA: [31m{
+    "message": "Фильм не найден",
+    "error": "Not Found",
+    "statusCode": 404
+}[0m
+2025-08-20 09:13:44 INFO ================================================================================

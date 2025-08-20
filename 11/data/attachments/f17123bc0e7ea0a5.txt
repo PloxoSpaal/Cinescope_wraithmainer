@@ -1,0 +1,130 @@
+2025-08-20 09:13:46 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:46 INFO [32mpytest tests/api/movies/test_get_movies.py::test_get_movie (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' 
+
+2025-08-20 09:13:46 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:46 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "4cc5bb1c-6bf7-4928-8f2f-8cf8ff41e200",
+        "email": "api1@gmail.com",
+        "fullName": "ФИО пользователя",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjI2LCJleHAiOjE3NTU2ODMwMjZ9.C0WJ3VZBPVebfo13TWmzbitgXRrrRCFQ-S1kDfyRbGk",
+    "refreshToken": "c584fb40-a1ea-4a15-8834-6822fd953ec9",
+    "expiresIn": 1755683026117
+}
+2025-08-20 09:13:46 INFO ================================================================================
+
+2025-08-20 09:13:46 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:46 INFO [32mpytest tests/api/movies/test_get_movies.py::test_get_movie (setup)[0m
+curl -X POST 'https://api.dev-cinescope.coconutqa.ru/movies' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjI2LCJleHAiOjE3NTU2ODMwMjZ9.C0WJ3VZBPVebfo13TWmzbitgXRrrRCFQ-S1kDfyRbGk' \
+-H 'Content-Length: 387' \
+-d '{"name": "Wear character create time enter option he.", "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png", "price": 986, "description": "Water star bank determine. Build various well behind effect identify. Enough dinner action government money organization bank.", "location": "MSK", "published": true, "genreId": 49}' 
+
+2025-08-20 09:13:46 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:46 INFO 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": 9567,
+    "name": "Wear character create time enter option he.",
+    "price": 986,
+    "description": "Water star bank determine. Build various well behind effect identify. Enough dinner action government money organization bank.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "MSK",
+    "published": true,
+    "rating": 0,
+    "genreId": 49,
+    "createdAt": "2025-08-20T09:13:46.657Z",
+    "genre": {
+        "name": "приключения еврейский"
+    }
+}
+2025-08-20 09:13:46 INFO ================================================================================
+2025-08-20 09:13:46 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:46 INFO [32mpytest tests/api/movies/test_get_movies.py::test_get_movie[0m
+curl -X GET 'https://api.dev-cinescope.coconutqa.ru/movies/9567' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+
+2025-08-20 09:13:46 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:46 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "id": 9567,
+    "name": "Wear character create time enter option he.",
+    "price": 986,
+    "description": "Water star bank determine. Build various well behind effect identify. Enough dinner action government money organization bank.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "MSK",
+    "published": true,
+    "rating": 0,
+    "genreId": 49,
+    "createdAt": "2025-08-20T09:13:46.657Z",
+    "reviews": [],
+    "genre": {
+        "name": "приключения еврейский"
+    }
+}
+2025-08-20 09:13:46 INFO ================================================================================
+2025-08-20 09:13:46 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:46 INFO [32mpytest tests/api/movies/test_get_movies.py::test_get_movie (teardown)[0m
+curl -X DELETE 'https://api.dev-cinescope.coconutqa.ru/movies/9567' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjI2LCJleHAiOjE3NTU2ODMwMjZ9.C0WJ3VZBPVebfo13TWmzbitgXRrrRCFQ-S1kDfyRbGk' \
+-H 'Content-Length: 0' \
+
+2025-08-20 09:13:46 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:46 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "id": 9567,
+    "name": "Wear character create time enter option he.",
+    "price": 986,
+    "description": "Water star bank determine. Build various well behind effect identify. Enough dinner action government money organization bank.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "MSK",
+    "published": true,
+    "rating": 0,
+    "genreId": 49,
+    "createdAt": "2025-08-20T09:13:46.657Z",
+    "reviews": [],
+    "genre": {
+        "name": "приключения еврейский"
+    }
+}
+2025-08-20 09:13:46 INFO ================================================================================

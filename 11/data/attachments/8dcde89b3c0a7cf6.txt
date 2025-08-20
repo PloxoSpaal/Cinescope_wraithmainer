@@ -1,0 +1,132 @@
+2025-08-20 09:13:27 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:27 INFO [32mpytest tests/api/movies/test_create_movies.py::test_create_movie (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' 
+
+2025-08-20 09:13:27 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:27 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "4cc5bb1c-6bf7-4928-8f2f-8cf8ff41e200",
+        "email": "api1@gmail.com",
+        "fullName": "ФИО пользователя",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjA3LCJleHAiOjE3NTU2ODMwMDd9.jHn33v48Bjzvnd3CtYe8HXCdixBRJDcSI8xLZ-viyw4",
+    "refreshToken": "a7af9b98-2983-42dc-a479-abc41a353fed",
+    "expiresIn": 1755683007721
+}
+2025-08-20 09:13:27 INFO ================================================================================
+2025-08-20 09:13:28 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:28 INFO [32mpytest tests/api/movies/test_create_movies.py::test_create_movie[0m
+curl -X POST 'https://api.dev-cinescope.coconutqa.ru/movies' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjA3LCJleHAiOjE3NTU2ODMwMDd9.jHn33v48Bjzvnd3CtYe8HXCdixBRJDcSI8xLZ-viyw4' \
+-H 'Content-Length: 426' \
+-d '{"name": "Rich learn apply.", "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png", "price": 936, "description": "Forward wife arrive unit state already. Business also capital vote region.\nAvoid some hotel pull attention buy Congress. Picture less recognize order maintain true. Community avoid kitchen.", "location": "MSK", "published": true, "genreId": 214}' 
+
+2025-08-20 09:13:28 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:28 INFO 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": 9558,
+    "name": "Rich learn apply.",
+    "price": 936,
+    "description": "Forward wife arrive unit state already. Business also capital vote region.\nAvoid some hotel pull attention buy Congress. Picture less recognize order maintain true. Community avoid kitchen.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "MSK",
+    "published": true,
+    "rating": 0,
+    "genreId": 214,
+    "createdAt": "2025-08-20T09:13:28.327Z",
+    "genre": {
+        "name": "триллер ягода"
+    }
+}
+2025-08-20 09:13:28 INFO ================================================================================
+
+2025-08-20 09:13:30 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:30 INFO [32mpytest tests/api/movies/test_create_movies.py::test_create_movie[0m
+curl -X GET 'https://api.dev-cinescope.coconutqa.ru/movies/9558' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjA3LCJleHAiOjE3NTU2ODMwMDd9.jHn33v48Bjzvnd3CtYe8HXCdixBRJDcSI8xLZ-viyw4' \
+
+2025-08-20 09:13:30 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:30 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "id": 9558,
+    "name": "Rich learn apply.",
+    "price": 936,
+    "description": "Forward wife arrive unit state already. Business also capital vote region.\nAvoid some hotel pull attention buy Congress. Picture less recognize order maintain true. Community avoid kitchen.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "MSK",
+    "published": true,
+    "rating": 0,
+    "genreId": 214,
+    "createdAt": "2025-08-20T09:13:28.327Z",
+    "reviews": [],
+    "genre": {
+        "name": "триллер ягода"
+    }
+}
+2025-08-20 09:13:30 INFO ================================================================================
+
+2025-08-20 09:13:30 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:30 INFO [32mpytest tests/api/movies/test_create_movies.py::test_create_movie[0m
+curl -X DELETE 'https://api.dev-cinescope.coconutqa.ru/movies/9558' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjA3LCJleHAiOjE3NTU2ODMwMDd9.jHn33v48Bjzvnd3CtYe8HXCdixBRJDcSI8xLZ-viyw4' \
+-H 'Content-Length: 0' \
+
+2025-08-20 09:13:30 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:30 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "id": 9558,
+    "name": "Rich learn apply.",
+    "price": 936,
+    "description": "Forward wife arrive unit state already. Business also capital vote region.\nAvoid some hotel pull attention buy Congress. Picture less recognize order maintain true. Community avoid kitchen.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "MSK",
+    "published": true,
+    "rating": 0,
+    "genreId": 214,
+    "createdAt": "2025-08-20T09:13:28.327Z",
+    "reviews": [],
+    "genre": {
+        "name": "триллер ягода"
+    }
+}
+2025-08-20 09:13:30 INFO ================================================================================

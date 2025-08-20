@@ -1,0 +1,122 @@
+2025-08-20 09:13:32 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:32 INFO [32mpytest tests/api/movies/test_create_movies.py::test_create_movie_with_same_name (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' 
+
+2025-08-20 09:13:32 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:32 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "4cc5bb1c-6bf7-4928-8f2f-8cf8ff41e200",
+        "email": "api1@gmail.com",
+        "fullName": "ФИО пользователя",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjEyLCJleHAiOjE3NTU2ODMwMTJ9.fOo6_fYMVs5ifyVloYbEXnv1fvECiPOBu8f7XATi2wo",
+    "refreshToken": "52927c91-6e08-4fcd-8ad9-bc48a1bd93b1",
+    "expiresIn": 1755683012531
+}
+2025-08-20 09:13:32 INFO ================================================================================
+2025-08-20 09:13:33 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:33 INFO [32mpytest tests/api/movies/test_create_movies.py::test_create_movie_with_same_name[0m
+curl -X POST 'https://api.dev-cinescope.coconutqa.ru/movies' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjEyLCJleHAiOjE3NTU2ODMwMTJ9.fOo6_fYMVs5ifyVloYbEXnv1fvECiPOBu8f7XATi2wo' \
+-H 'Content-Length: 446' \
+-d '{"name": "Camera commercial begin foot.", "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png", "price": 898, "description": "Food person artist star these meet drive. Name something government child brother alone. Child computer if huge. Appear usually structure draw huge.\nStructure structure yes store blood baby raise.", "location": "MSK", "published": false, "genreId": 189}' 
+
+2025-08-20 09:13:33 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:33 INFO 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": 9560,
+    "name": "Camera commercial begin foot.",
+    "price": 898,
+    "description": "Food person artist star these meet drive. Name something government child brother alone. Child computer if huge. Appear usually structure draw huge.\nStructure structure yes store blood baby raise.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "MSK",
+    "published": false,
+    "rating": 0,
+    "genreId": 189,
+    "createdAt": "2025-08-20T09:13:33.081Z",
+    "genre": {
+        "name": "мелодрама магазин"
+    }
+}
+2025-08-20 09:13:33 INFO ================================================================================
+
+2025-08-20 09:13:33 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:33 INFO [32mpytest tests/api/movies/test_create_movies.py::test_create_movie_with_same_name[0m
+curl -X POST 'https://api.dev-cinescope.coconutqa.ru/movies' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjEyLCJleHAiOjE3NTU2ODMwMTJ9.fOo6_fYMVs5ifyVloYbEXnv1fvECiPOBu8f7XATi2wo' \
+-H 'Content-Length: 446' \
+-d '{"name": "Camera commercial begin foot.", "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png", "price": 898, "description": "Food person artist star these meet drive. Name something government child brother alone. Child computer if huge. Appear usually structure draw huge.\nStructure structure yes store blood baby raise.", "location": "MSK", "published": false, "genreId": 189}' 
+
+2025-08-20 09:13:33 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:33 INFO 	STATUS_CODE: [31m409[0m
+	DATA: [31m{
+    "message": "Фильм с таким названием уже существует",
+    "error": "Conflict",
+    "statusCode": 409
+}[0m
+2025-08-20 09:13:33 INFO ================================================================================
+
+2025-08-20 09:13:33 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:33 INFO [32mpytest tests/api/movies/test_create_movies.py::test_create_movie_with_same_name[0m
+curl -X DELETE 'https://api.dev-cinescope.coconutqa.ru/movies/9560' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjEyLCJleHAiOjE3NTU2ODMwMTJ9.fOo6_fYMVs5ifyVloYbEXnv1fvECiPOBu8f7XATi2wo' \
+-H 'Content-Length: 0' \
+
+2025-08-20 09:13:33 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:33 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "id": 9560,
+    "name": "Camera commercial begin foot.",
+    "price": 898,
+    "description": "Food person artist star these meet drive. Name something government child brother alone. Child computer if huge. Appear usually structure draw huge.\nStructure structure yes store blood baby raise.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "MSK",
+    "published": false,
+    "rating": 0,
+    "genreId": 189,
+    "createdAt": "2025-08-20T09:13:33.081Z",
+    "reviews": [],
+    "genre": {
+        "name": "мелодрама магазин"
+    }
+}
+2025-08-20 09:13:33 INFO ================================================================================

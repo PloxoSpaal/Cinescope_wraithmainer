@@ -1,0 +1,173 @@
+2025-08-20 09:13:45 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:45 INFO [32mpytest tests/api/movies/test_get_movies.py::test_get_movies[0m
+curl -X GET 'https://api.dev-cinescope.coconutqa.ru/movies?pageSize=10&page=1&minPrice=1&maxPrice=1000&locations=MSK&locations=SPB&published=True&createdAt=asc' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+
+2025-08-20 09:13:45 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:45 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "movies": [
+        {
+            "id": 22,
+            "name": "Море крови и рваных жоп",
+            "description": "Девушка открывает в себе телекинетические способности и с их помощью сдает ЕГЭ",
+            "genreId": 3,
+            "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_CF05Bl3sqs8q0s5LOd1ephWDHx-6C8Y0Pg&s",
+            "price": 998,
+            "rating": 2,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2024-07-12T09:37:03.390Z",
+            "genre": {
+                "name": "Фантастика"
+            }
+        },
+        {
+            "id": 5,
+            "name": "Море крови и рваных жоп 2",
+            "description": "Внучка главной героини из первого фильма получила силу, которая и не снилась ее бабуле. Вместо того, чтобы направить телекинетические способности на получение образования она взрывает пуканы бумеров, вейпит, кринжует и считает, что это СВЭГ.",
+            "genreId": 2,
+            "imageUrl": "https://cdn1.ozone.ru/multimedia/c600/1034228334.jpg",
+            "price": 1000,
+            "rating": 4,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2024-07-12T09:43:15.986Z",
+            "genre": {
+                "name": "Комедия"
+            }
+        },
+        {
+            "id": 25,
+            "name": "фывфывфывфывe",
+            "description": "Movie description",
+            "genreId": 1,
+            "imageUrl": "https://image.url",
+            "price": 100,
+            "rating": 5,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2024-08-27T07:06:17.336Z",
+            "genre": {
+                "name": "Драма"
+            }
+        },
+        {
+            "id": 41,
+            "name": "Король Лев",
+            "description": "У величественного Короля-Льва Муфасы рождается наследник по имени Симба. Уже в детстве любознательный малыш становится жертвой интриг своего завистливого дяди Шрама, мечтающего о власти.",
+            "genreId": 1,
+            "imageUrl": "https://avatars.mds.yandex.net/get-kinopoisk-image/1704946/60aa1abc-b754-4817-ad9c-0bcda427a12b/300x450",
+            "price": 260,
+            "rating": 3,
+            "location": "MSK",
+            "published": true,
+            "createdAt": "2024-08-27T07:38:14.807Z",
+            "genre": {
+                "name": "Драма"
+            }
+        },
+        {
+            "id": 14,
+            "name": "Зеленая миля",
+            "description": "Пол Эджкомб не верил в чудеса. Пока не столкнулся с одним из них",
+            "genreId": 1,
+            "imageUrl": "https://www.kinopoisk.ru/u3kU04367/f0008eGp5",
+            "price": 250,
+            "rating": 4,
+            "location": "MSK",
+            "published": true,
+            "createdAt": "2024-08-27T07:38:40.773Z",
+            "genre": {
+                "name": "Драма"
+            }
+        },
+        {
+            "id": 6,
+            "name": "1+1",
+            "description": "Аристократ на коляске нанимает в сиделки бывшего заключенного.",
+            "genreId": 3,
+            "imageUrl": "https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/bf93b465-1189-4155-9dd1-cb9fb5cb1bb5/300x450",
+            "price": 350,
+            "rating": 0,
+            "location": "MSK",
+            "published": true,
+            "createdAt": "2024-08-27T07:39:10.815Z",
+            "genre": {
+                "name": "Фантастика"
+            }
+        },
+        {
+            "id": 7,
+            "name": "Побег из Шоушенка",
+            "description": "Страх — это кандалы. Надежда — это свобода",
+            "genreId": 1,
+            "imageUrl": "https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/0b76b2a2-d1c7-4f04-a284-80ff7bb709a4/300x450",
+            "price": 330,
+            "rating": 0,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2024-08-27T07:40:10.463Z",
+            "genre": {
+                "name": "Драма"
+            }
+        },
+        {
+            "id": 8,
+            "name": "Форрест Гамп",
+            "description": "Мир уже никогда не будет прежним, после того как вы увидите его глазами Форреста Гампа",
+            "genreId": 4,
+            "imageUrl": "https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/3560b757-9b95-45ec-af8c-623972370f9d/300x450",
+            "price": 300,
+            "rating": 0,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2024-08-27T07:40:53.373Z",
+            "genre": {
+                "name": "Криминал"
+            }
+        },
+        {
+            "id": 9,
+            "name": "Интерстеллар",
+            "description": "Следующий шаг человечества станет величайшим",
+            "genreId": 1,
+            "imageUrl": "https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/430042eb-ee69-4818-aed0-a312400a26bf/300x450",
+            "price": 300,
+            "rating": 4.3,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2024-08-27T07:41:20.484Z",
+            "genre": {
+                "name": "Драма"
+            }
+        },
+        {
+            "id": 16,
+            "name": "Унесённые призраками",
+            "description": "Тихиро с мамой и папой переезжает в новый дом. Заблудившись по дороге, они оказываются в странном пустынном городе, где их ждет великолепный пир.",
+            "genreId": 2,
+            "imageUrl": "https://avatars.mds.yandex.net/get-kinopoisk-image/6201401/ae3b699c-3db7-4196-a869-39b610bfe706/300x450",
+            "price": 300,
+            "rating": 4,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2024-08-27T07:41:58.367Z",
+            "genre": {
+                "name": "Комедия"
+            }
+        }
+    ],
+    "count": 2485,
+    "page": 1,
+    "pageSize": 10,
+    "pageCount": 249
+}
+2025-08-20 09:13:45 INFO ================================================================================

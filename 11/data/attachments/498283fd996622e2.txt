@@ -1,0 +1,62 @@
+2025-08-20 09:13:56 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:56 INFO [32mpytest tests/api/test_user.py::TestUser::test_create_user (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' 
+
+2025-08-20 09:13:56 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:56 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "4cc5bb1c-6bf7-4928-8f2f-8cf8ff41e200",
+        "email": "api1@gmail.com",
+        "fullName": "ФИО пользователя",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjM2LCJleHAiOjE3NTU2ODMwMzZ9.okbPm1TrVqAfu_A-Lxt6DAhcIKih2EIqsIbDHV3D5s8",
+    "refreshToken": "00ae7dba-3080-4f8b-a137-6c5183d25400",
+    "expiresIn": 1755683036624
+}
+2025-08-20 09:13:56 INFO ================================================================================
+2025-08-20 09:13:57 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:57 INFO [32mpytest tests/api/test_user.py::TestUser::test_create_user[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/user' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjM2LCJleHAiOjE3NTU2ODMwMzZ9.okbPm1TrVqAfu_A-Lxt6DAhcIKih2EIqsIbDHV3D5s8' \
+-H 'Cookie: refresh_token=00ae7dba-3080-4f8b-a137-6c5183d25400' \
+-H 'Content-Length: 188' \
+-d '{"email": "nnfi8tlc@gmail.com", "fullName": "Jonathan Bell", "password": "n34wCjq7hO?0Jn8%:B", "passwordRepeat": "n34wCjq7hO?0Jn8%:B", "roles": ["USER"], "banned": false, "verified": true}' 
+
+2025-08-20 09:13:57 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:57 INFO 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": "e1a94bea-6e4e-45ab-be83-d9d344217a30",
+    "email": "nnfi8tlc@gmail.com",
+    "fullName": "Jonathan Bell",
+    "verified": true,
+    "banned": false,
+    "roles": [
+        "USER"
+    ],
+    "createdAt": "2025-08-20T09:13:56.919Z"
+}
+2025-08-20 09:13:57 INFO ================================================================================

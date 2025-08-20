@@ -1,0 +1,120 @@
+2025-08-20 09:13:39 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:39 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movies[create_movie_fixture1] (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' 
+
+2025-08-20 09:13:39 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:39 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "4cc5bb1c-6bf7-4928-8f2f-8cf8ff41e200",
+        "email": "api1@gmail.com",
+        "fullName": "ФИО пользователя",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjE5LCJleHAiOjE3NTU2ODMwMTl9.Va4vcTfFLIOuxGTOgXJ2gmQSuTI-HATs-zq7zgoMlIQ",
+    "refreshToken": "70fbea7b-715e-41eb-8316-e7353f6b92df",
+    "expiresIn": 1755683019630
+}
+2025-08-20 09:13:39 INFO ================================================================================
+2025-08-20 09:13:40 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:40 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movies[create_movie_fixture1][0m
+curl -X POST 'https://api.dev-cinescope.coconutqa.ru/movies' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjE5LCJleHAiOjE3NTU2ODMwMTl9.Va4vcTfFLIOuxGTOgXJ2gmQSuTI-HATs-zq7zgoMlIQ' \
+-H 'Content-Length: 396' \
+-d '{"name": "Approach evidence grow black stop.", "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png", "price": 397, "description": "Worry however ball. Source hospital whose interest both.\nAdd treat tell put never science. American walk successful he anyone amount campaign.", "location": "SPB", "published": true, "genreId": 127}' 
+
+2025-08-20 09:13:40 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:40 INFO 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": 9563,
+    "name": "Approach evidence grow black stop.",
+    "price": 397,
+    "description": "Worry however ball. Source hospital whose interest both.\nAdd treat tell put never science. American walk successful he anyone amount campaign.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "SPB",
+    "published": true,
+    "rating": 0,
+    "genreId": 127,
+    "createdAt": "2025-08-20T09:13:40.166Z",
+    "genre": {
+        "name": "детектив сомнительный"
+    }
+}
+2025-08-20 09:13:40 INFO ================================================================================
+
+2025-08-20 09:13:40 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:40 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movies[create_movie_fixture1][0m
+curl -X DELETE 'https://api.dev-cinescope.coconutqa.ru/movies/9563' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjE5LCJleHAiOjE3NTU2ODMwMTl9.Va4vcTfFLIOuxGTOgXJ2gmQSuTI-HATs-zq7zgoMlIQ' \
+-H 'Content-Length: 0' \
+
+2025-08-20 09:13:40 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:40 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "id": 9563,
+    "name": "Approach evidence grow black stop.",
+    "price": 397,
+    "description": "Worry however ball. Source hospital whose interest both.\nAdd treat tell put never science. American walk successful he anyone amount campaign.",
+    "imageUrl": "https://poknok.art/uploads/posts/2022-11/thumbs/1668713844_33-poknok-art-p-ptitsi-belom-fone-foto-35.png",
+    "location": "SPB",
+    "published": true,
+    "rating": 0,
+    "genreId": 127,
+    "createdAt": "2025-08-20T09:13:40.166Z",
+    "reviews": [],
+    "genre": {
+        "name": "детектив сомнительный"
+    }
+}
+2025-08-20 09:13:40 INFO ================================================================================
+
+2025-08-20 09:13:40 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:40 INFO [32mpytest tests/api/movies/test_delete_movies.py::test_delete_movies[create_movie_fixture1][0m
+curl -X GET 'https://api.dev-cinescope.coconutqa.ru/movies/9563' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzU1NjgxMjE5LCJleHAiOjE3NTU2ODMwMTl9.Va4vcTfFLIOuxGTOgXJ2gmQSuTI-HATs-zq7zgoMlIQ' \
+
+2025-08-20 09:13:40 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:40 INFO 	STATUS_CODE: [31m404[0m
+	DATA: [31m{
+    "message": "Фильм не найден",
+    "error": "Not Found",
+    "statusCode": 404
+}[0m
+2025-08-20 09:13:40 INFO ================================================================================

@@ -1,0 +1,68 @@
+2025-08-20 09:13:47 INFO 
+======================================== REQUEST ========================================
+2025-08-20 09:13:47 INFO [32mpytest tests/api/movies/test_get_movies.py::test_get_movies_with_multiply_filters[620-378-SPB-10][0m
+curl -X GET 'https://api.dev-cinescope.coconutqa.ru/movies?pageSize=10&page=1&minPrice=378&maxPrice=620&locations=SPB&published=True&createdAt=asc&genreId=10' \
+-H 'User-Agent: python-requests/2.32.4' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+
+2025-08-20 09:13:47 INFO 
+======================================== RESPONSE ========================================
+2025-08-20 09:13:47 INFO 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "movies": [
+        {
+            "id": 2131,
+            "name": "Test Movie - Centralized uniform Local Area Network",
+            "description": "Together responsibility better suggest card visit. National expect cut across material how player.\nMiddle lose meeting again from include Congress.",
+            "genreId": 10,
+            "imageUrl": "https://picsum.photos/71/720",
+            "price": 467,
+            "rating": 0,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2025-06-11T12:34:15.651Z",
+            "genre": {
+                "name": "Военный"
+            }
+        },
+        {
+            "id": 2180,
+            "name": "Test Movie - Vision-oriented eco-centric algorithm",
+            "description": "With war remain war play. Produce seat party stand such degree scene. Beautiful offer voice treat yet.",
+            "genreId": 10,
+            "imageUrl": "https://picsum.photos/523/501",
+            "price": 466,
+            "rating": 0,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2025-06-12T08:23:20.849Z",
+            "genre": {
+                "name": "Военный"
+            }
+        },
+        {
+            "id": 2319,
+            "name": "Test Movie - Upgradable uniform collaboration",
+            "description": "Now middle sister hold several training onto. Economy school business.",
+            "genreId": 10,
+            "imageUrl": "https://dummyimage.com/657x756",
+            "price": 433,
+            "rating": 0,
+            "location": "SPB",
+            "published": true,
+            "createdAt": "2025-06-13T10:03:36.824Z",
+            "genre": {
+                "name": "Военный"
+            }
+        }
+    ],
+    "count": 3,
+    "page": 1,
+    "pageSize": 10,
+    "pageCount": 1
+}
+2025-08-20 09:13:47 INFO ================================================================================
