@@ -32,6 +32,6 @@ def test_login_user_with_incorrect_password(admin, registered_user: UserFixtureS
     login_data = LoginRequestSchema(email=registered_user.email, password=DataGenerator.generate_random_password())
     response = admin.api.auth_api.login_user(login_data, expected_status=401)
     response_data = response.json()
-    assert response_data['message'] == AUTH_ERR_MSG, \
-        f'Expected error message: "{AUTH_ERR_MSG}", got "{response_data['message']}"'
-    admin.api.user_api.delete_user(registered_user.id, expected_status=200)
+    assert response_data['message'] == AUTH_ERR_MSG #, \
+    #    f'Expected error message: "{AUTH_ERR_MSG}", got "{response_data['message']}"'
+    #admin.api.user_api.delete_user(registered_user.id, expected_status=200)
