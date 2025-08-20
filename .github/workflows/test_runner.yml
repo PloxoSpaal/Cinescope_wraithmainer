@@ -76,6 +76,7 @@ jobs:
 
     # Шаг 7: Сохранение результатов тестов как артефакта
     - name: Upload Allure results
+      if: always()
       # Используем действие для загрузки артефактов
       uses: actions/upload-artifact@v4
       with:
