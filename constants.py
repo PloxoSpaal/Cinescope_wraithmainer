@@ -2,6 +2,9 @@ from enum import Enum
 import os
 
 
+WHAT_IS_TODAY_URL = "http://127.0.0.1:16002/what_is_today"
+FAKE_WORLD_CLOCK_API_URL = "http://127.0.0.1:16001/fake/worldclockapi/api/json/utc/now"
+WORLD_CLOCK_API_URL = "http://worldclockapi.com/api/json/utc/now"
 BASE_URL = 'https://api.dev-cinescope.coconutqa.ru'
 AUTH_BASE_URL = 'https://auth.dev-cinescope.coconutqa.ru'
 HEADERS = {

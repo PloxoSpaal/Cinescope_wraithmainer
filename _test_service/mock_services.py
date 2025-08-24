@@ -1,88 +1,127 @@
 import datetime
 from unittest.mock import Mock
+
+import pytest
 import pytz
 import requests
-from constants import BASE_URL, HEADERS, REGISTER_ENDPOINT, LOGIN_ENDPOINT
+import allure
+from pytest_check import check
+
+from constants import BASE_URL, HEADERS, REGISTER_ENDPOINT, LOGIN_ENDPOINT, WORLD_CLOCK_API_URL, \
+    FAKE_WORLD_CLOCK_API_URL, WHAT_IS_TODAY_URL
 from custom_requester.custom_requester import CustomRequester
 from api.api_manager import ApiManager
 from constants import Roles
 from schemas.user_fixture_schema import RegisterUserResponseSchema, UserSchema
 import requests
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
 from pytest_mock import mocker
 
 
-# Модель Pydantic для ответа сервера worldclockapi
 class WorldClockResponse(BaseModel):
-    id: str = Field(alias="$id")  # Используем алиас для поля "$id"
-    currentDateTime: str
-    utcOffset: str
-    isDayLightSavingsTime: bool
-    dayOfTheWeek: str
-    timeZoneName: str
-    currentFileTime: int
-    ordinalDate: str
-    serviceResponse: None
+    """
+    Стурктура ответа сервера worldclockapi
+    """
+    model_config = ConfigDict(populate_by_name=True)
 
-    class Config:
-        # Разрешаем использование алиасов при парсинге JSON
-        allow_population_by_field_name = True
+    id: str = Field(alias="$id")
+    current_date_time: str = Field(
+        examples=["2025-02-13T21:432Z", "2025-02-13T21:432Z"],
+        description='Дата и время в формате ISO 8601 (YYYY-MM-DDTHH:MMZ)',
+        alias='currentDateTime')
+    utc_offset: str = Field(description='Смещение времени по таймзоне', alias='utcOffset')
+    is_day_light_savings_time: bool = Field(alias='isDayLightSavingsTime')
+    day_of_the_week: str = Field(description='День недели', alias='dayOfTheWeek')
+    time_zone_name: str = Field(description='Название города по таймзоне', alias='timeZoneName')
+    current_file_time: int = Field(alias='currentFileTime')
+    ordinal_date: str = Field(alias='ordinalDate')
+    service_response: None = Field(alias='serviceResponse')
 
 
-# Модель для запроса к сервису TodayIsHoliday
 class DateTimeRequest(BaseModel):
-    currentDateTime: str  # Формат: "2025-02-13T21:43Z"
+    """
+    Структура запроса к сервису TodayIsHoliday
+    """
+    model_config = ConfigDict(populate_by_name=True)
+
+    current_date_time: str = Field(
+        examples=["2025-02-13T21:432Z", "2025-02-13T21:432Z"],
+        description='Дата и время в формате ISO 8601 (YYYY-MM-DDTHH:MMZ)',
+        alias='currentDateTime')
 
 
-# Модель для ответа от сервиса TodayIsHoliday
 class WhatIsTodayResponse(BaseModel):
+    """
+    Структура ответа сервиса TodayIsHoliday
+    """
     message: str
 
 
-# Функция выолняющая запрос в сервис worldclockapi для получения текущей даты
+@allure.step('Получение данных из сервиса worldclockapi')
 def get_worldclockap_time() -> WorldClockResponse:
-    # Выполняем GET-запрос
-    response = requests.get("http://worldclockapi.com/api/json/utc/now")  # Запрос в реальный сервис
-    # Проверяем статус ответа
-    assert response.status_code == 200, "Удаленный сервис недоступен"
-    # Парсим JSON-ответ с использованием Pydantic модели
-    return WorldClockResponse(**response.json())
+    """
+    Функция получает данные текущей даты из сервиса worldclockapi
+    :return: Ответ в формате WorldClockResponse
+    """
+    with allure.step('Отправка GET запроса'):
+        with check:
+            response = requests.get(WORLD_CLOCK_API_URL)
+    with allure.step('Проверка статус кода ответа сервиса'):
+        with check:
+            assert response.status_code == 200, "Удаленный сервис недоступен"
+    with allure.step('Валидация ответа сервиса в WorldClockResponse:'):
+        with check:
+            return WorldClockResponse(**response.json())
 
 
-# Modul_4\Cinescope\tests\api\mock_services.py
-# Функция выполняющая запрос в Fake сервис worldclockapi для получения текущей даты
+@allure.step('Получение данных из Fake сервиса worldclockapi')
 def get_fake_worldclockap_time() -> WorldClockResponse:
-    # Выполняем GET-запрос
-    response = requests.get("http://127.0.0.1:16001/fake/worldclockapi/api/json/utc/now")  # Запрос в реальный сервис
-    # Проверяем статус ответа
-    assert response.status_code == 200, "Удаленный сервис недоступен"
-    # Парсим JSON-ответ с использованием Pydantic модели
-    return WorldClockResponse(**response.json())
+    """
+    Функция получает данные текущей даты из Fake сервиса worldclockapi
+    :return: Ответ в формате WorldClockResponse
+    """
+    with allure.step('Отправка GET запроса'):
+        with check:
+            response = requests.get(FAKE_WORLD_CLOCK_API_URL)
+    with allure.step('Проверка статус кода ответа сервиса'):
+        with check:
+            assert response.status_code == 200, "Удаленный сервис недоступен"
+    with allure.step('Валидация ответа сервиса в WorldClockResponse:'):
+        with check:
+            return WorldClockResponse(**response.json())
 
 
+@allure.epic('Тесты с использованием заглушек, Fake-сервисов')
 class TestTodayIsHolidayServiceAPI:
-    # worldclockap
-    def test_fake_worldclockap(self):  # проверка работоспособности сервиса worldclockap
+
+    @allure.title('Проверка работоспособности сервиса worldclockap')
+    @pytest.mark.flaky(reruns=3)
+    @pytest.mark.integration
+    def test_fake_worldclockap(self):
         world_clock_response = get_fake_worldclockap_time()
-        # Выводим текущую дату и время
-        current_date_time = world_clock_response.currentDateTime
-        print(f"Текущая дата и время: {current_date_time=}")
+        with check('Получение даты из ответа'):
+            current_date_time = world_clock_response.currentDateTime
+            print(f"Текущая дата и время: {current_date_time=}")
+        with (allure.step('Проверка совпадения даты и времени')):
+            assert current_date_time == datetime.now(pytz.utc).strftime("%Y-%m-%dT%H:%MZ"),
+            "Дата не совпадает"
 
-        assert current_date_time == datetime.now(pytz.utc).strftime("%Y-%m-%dT%H:%MZ"), "Дата не совпадает"
-
-    def test_fake_what_is_today(self):  # проверка работоспособности Fake сервиса what_is_today
-        # Запрашиваем текущее время у сервиса worldclockap
+    @allure.title('Проверка работоспособности Fake-сервиса what_is_today')
+    @pytest.mark.integration
+    def test_fake_what_is_today(self):
         world_clock_response = get_fake_worldclockap_time()
-
-        what_is_today_response = requests.post("http://127.0.0.1:16002/what_is_today",
-                                               data=DateTimeRequest(
-                                                   currentDateTime=world_clock_response.currentDateTime).model_dump_json()
-                                               )
-
-        # Проверяем статус ответа от тестируемого сервиса
-        assert what_is_today_response.status_code == 200, "Удаленный сервис недоступен"
-        # Парсим JSON-ответ от тестируемого сервиса с использованием Pydantic модели
-        what_is_today_data = WhatIsTodayResponse(**what_is_today_response.json())
-
-        assert what_is_today_data.message == "Сегодня нет праздников в России.", "Сегодня нет праздника!"
+        with allure.step('Отправка POST запроса на сервис what_is_today'):
+            with check:
+                what_is_today_response = requests.post(
+                    url=WHAT_IS_TODAY_URL,
+                    data=DateTimeRequest(
+                        currentDateTime=world_clock_response.currentDateTime).model_dump_json())
+        with allure.step('Проверка статус кода ответа сервиса'):
+            with check:
+                assert what_is_today_response.status_code == 200, "Удаленный сервис недоступен"
+        with allure.step('Валидация структуры ответа WhatIsTodayResponse'):
+            with check:
+                what_is_today_data = WhatIsTodayResponse(**what_is_today_response.json())
+        with allure.step('Проверка сообщения ответа'):
+            assert what_is_today_data.message == "Сегодня нет праздников в России.", "Сегодня нет праздника!"

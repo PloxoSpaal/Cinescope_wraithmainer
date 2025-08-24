@@ -2,7 +2,7 @@ from custom_requester.custom_requester import CustomRequester
 from requests import Session
 from constants import BASE_URL
 from typing import List
-from schemas.movie_schema import CreateMovieRequestSchema
+from schemas.movie_schema import CreateMovieRequestSchema, GetMoviesResponseSchema
 from requests import Response
 import allure
 
@@ -79,13 +79,17 @@ class MoviesAPI(CustomRequester):
             expected_status=expected_status)
 
     @allure.step("Получение списка ID фильмов")
-    def get_movies_id(self) -> List[str | int]:
+    def get_movies_id(self) -> List[int]:
         """
         Получение ID фильмов
         """
         response = self.get_movies()
-        movies = response['movies']
-        ids = list(map(lambda x: x['id'], movies))
+        response_data = GetMoviesResponseSchema.model_validate_json(response.text)
+        movies = response_data.movies
+        ids = []
+        for movie in movies:
+            id = movie.id
+            ids.append(id)
         return ids
 
     @allure.step("Удаление фильма /movies/{movie_id}")

@@ -1,22 +1,10 @@
-# для запуска сервера
-# pip install -r requirements.txt
-# python test_services\service_what_is_today.py
-# для проверки работоспособности curl http://127.0.0.1:16002/ping
-
 import datetime
-
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+
+from _test_service.mock_services import DateTimeRequest
+import allure
 
 app = FastAPI()
-
-
-# Модель для входного JSON
-class DateTimeRequest(BaseModel):
-    currentDateTime: str  # Формат: "2025-02-13T21:43Z"
-
-
-# Список праздников в России (пример)
 russian_holidays = {
     "01-01": "Новый год",
     "01-07": "Рождество Христово",
@@ -26,32 +14,35 @@ russian_holidays = {
     "05-09": "День Победы",
     "06-12": "День России",
     "11-04": "День народного единства",
-    "12-31": "Канун Нового года"
-}
+    "12-31": "Канун Нового года"}
 
 
+@allure.step('POST-запрос на сервис /what_is_today')
 @app.post("/what_is_today")
 def what_is_today(request: DateTimeRequest):
+    """
+    Преобразование даты в праздник
+    :param request: Запрос клиента с датой и временем
+    :return: Ответ JSON: {"message": holiday}
+    """
     try:
-        # Парсим дату из входного JSON
         date_str = request.currentDateTime
         date_obj = datetime.datetime.strptime(date_str, "%Y-%m-%dT%H:%MZ")
-
-        # Получаем месяц и день в формате "MM-DD"
         month_day = date_obj.strftime("%m-%d")
-
-        # Проверяем, есть ли праздник на эту дату
         holiday = russian_holidays.get(month_day, "Сегодня нет праздников в России.")
-
         return {"message": holiday}
-
-
     except ValueError:
-        raise HTTPException(status_code=400, detail="Некорректный формат даты. Используйте формат 'YYYY-MM-DDTHH:MMZ'.")
+        raise HTTPException(
+            status_code=400, detail="Некорректный формат даты. Используйте формат 'YYYY-MM-DDTHH:MMZ'.")
 
 
+@allure.step('Пинг сервиса /what_is_today')
 @app.get("/ping")
 def ping():
+    """
+    Ответ сервера для подтверждения его работоспособности
+    :return: Текст с ответным сообщением
+    """
     return "PONG!"
 
 
